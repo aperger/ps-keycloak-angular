@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakLoginOptions } from 'keycloak-js';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -37,6 +38,6 @@ export class AppComponent implements OnInit {
   }
 
   logout(): Promise<void> {
-    return this.keycloakService.logout('http://localhost:4200');
+    return this.keycloakService.logout(environment.KEYCLOAK_REDIRECT_URI);
   }
 }

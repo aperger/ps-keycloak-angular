@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: ps-keycloak-frontend-deployment
+  labels:
+      app: ps-keycloak-frontend
+      type: front-end
+
+spec:
+  selector:
+    matchLabels:
+      app: ps-keycloak-frontend
+      type: front-end
+  template:
+    metadata:
+     name: ps-keycloak-frontend-pod
+     labels:
+        app: ps-keycloak-frontend
+        type: front-end
+    spec:
+      containers:
+      - name: ps-keycloak-frontend
+        image: ps-keycloak-angular:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080

@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ps-keycloak-frontend-ingress
+spec:
+  ingressClassName: traefik
+  rules:
+  # add "127.0.0.1 ps-keycloak-frontend.rancher.local" line into /etc/hosts file in local environment
+  - host: ps-keycloak-frontend.rancher.local
+    http:
+      paths:
+      - backend:
+          service:
+            name: ps-keycloak-frontend-service
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix

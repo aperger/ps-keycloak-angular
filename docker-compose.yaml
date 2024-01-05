@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  ps-keycloak-frontend:
+    image: ps-keycloak-angular:latest
+    container_name: 'ps-keycloak-angular'
+    ports:
+      - '8080:8080'
+
+networks:
+  ps_services:
+    driver: bridge

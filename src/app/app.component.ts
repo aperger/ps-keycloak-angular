@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakLoginOptions } from 'keycloak-js';
-import { environment } from 'src/environments/environment';
+import { AppUrlService } from './services/app-url.service';
 
 @Component({
   selector: 'app-root',
@@ -13,11 +13,12 @@ export class AppComponent implements OnInit {
   title = 'ps-keycloak-angular';
 
   constructor (
-    private keycloakService: KeycloakService) {}
+    private keycloakService: KeycloakService, /*private router: Router,*/ private appUrlService: AppUrlService) {}
 
   private loggedIn = false;
 
   ngOnInit(): void {
+    //this.appUrlService.init(this.router);
     console.log('Method ngOnInit.');
     this.keycloakService.isLoggedIn().then(reason => {
       console.log(`Logged in? -> ${reason}`);
@@ -38,6 +39,6 @@ export class AppComponent implements OnInit {
   }
 
   logout(): Promise<void> {
-    return this.keycloakService.logout(environment.KEYCLOAK_REDIRECT_URI);
+    return this.keycloakService.logout(this.appUrlService.appBaseUrl /*window.location.origin*/);
   }
 }

@@ -1,6 +1,6 @@
 #### TODO 
 
-After CERT creation we need to copy tha full chain of certiticate and the private key into one file, this new file ned to imported into and Azure KeyVault.
+After CERT creation we need to copy tha full chain of certiticate and the private key into one file, this new file need to imported into an Azure KeyVault.
 
 ```
 cat fullchain.pem privkey.pem > azure.pem

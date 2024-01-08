@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.azure.com/tls-cert-keyvault-uri: https://kvpegersoftk8s.vault.azure.net/certificates/ps-keycloak-frontend
+  name: ps-keycloak-frontend-ingress
+  namespace: default
+spec:
+  ingressClassName: webapprouting.kubernetes.azure.com
+  rules:
+    - host: ps-keycloak-frontend.azure.pergersoft.hu
+      http:
+        paths:
+          - backend:
+              service:
+                name: ps-keycloak-frontend-service
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - ps-keycloak-frontend.azure.pergersoft.hu
+      secretName: keyvault-ps-keycloak-frontend-ingress

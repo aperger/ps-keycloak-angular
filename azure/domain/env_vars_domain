@@ -1,0 +1,5 @@
+DOMAIN_NAME=azure.pergersoft.hu
+DOMAIN_RESOURCE_GROUP=rg_domain
+DOMAIN_KEY_VAULT=kvpsdomain
+DOMAIN_LOCATION=westeurope
+WILDCARD_CERT=wildcardcert

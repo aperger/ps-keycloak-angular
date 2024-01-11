@@ -1,27 +1,22 @@
-# PsKeycloakAngular
+# PS Keycloak Angular application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
+This application try to demonstarte the usage of keycloak-angular package. Which helps to create sinle page WEB application with OpenID based security.
 
-## Development server
+* [keycloak-js](https://www.npmjs.com/package/keycloak-js)
+A client-side JavaScript OpenID Connect library that can be used to secure web applications
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+* [keycloak-angular](https://www.npmjs.com/package/keycloak-angular)
+Keycloak Service which wraps the keycloak-js methods to be used in Angular
 
-## Code scaffolding
+The application gather Access Token from the authorization server during the login, and ussing this tokens request Welcome messages from two resource servers, which secured with the mentioned authozization server. These services run with "Free F1 Service Plan", so sometimes they are not available, or takes long to to start (at the first hit).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* https://ps-servlet-api.azurewebsites.net/ [Source]()
+* https://ps-reactive-api.azurewebsites.net/ 
 
-## Build
+Detils about these services [here](https://github.com/aperger/service-template).
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Postscript: This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

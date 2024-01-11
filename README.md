@@ -26,3 +26,5 @@ The second goal of this repository is to store the scripts ('azure' folder) and 
 * The infrastucture is generated with Azure CLI ('azure' folder)
 * The DNS is manages under Azure (DNS Zone, 'azure/domain' folder) 
 * Certificates are generated with 'certbot' for Les't Encrypt ('azure/domain/cert' folder)
+
+The Azure Kubernetes cluster not always runnning... coontact me to demonstarte!

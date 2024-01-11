@@ -11,7 +11,7 @@ A client-side JavaScript OpenID Connect library that can be used to secure web a
 * [keycloak-angular](https://www.npmjs.com/package/keycloak-angular)
 Keycloak Service which wraps the keycloak-js methods to be used in Angular
 
-The application gather Access Token from the authorization server during the login, and using this tokens to request a 'Welcome message' from two resource servers, which secured with the mentioned authozization server. These services run with "Free F1 Service Plan", so sometimes they are not available, or takes long time to start (at the first hit).
+The application gather Access Token from the authorization server during the login, and using this token to request a 'Welcome message' from two resource servers, which secured with the mentioned authozization server. These services run with "Free F1 Service Plan", so sometimes they are not available, or takes long time to start (at the first hit).
 
 * https://ps-servlet-api.azurewebsites.net
 * https://ps-reactive-api.azurewebsites.net 
@@ -27,4 +27,4 @@ The second goal of this repository is to store the scripts ('azure' folder) and 
 * The DNS is manages under Azure (DNS Zone, 'azure/domain' folder) 
 * Certificates are generated with 'certbot' for Les't Encrypt ('azure/domain/cert' folder)
 
-The Azure Kubernetes cluster not always runnning... coontact me to demonstarte!
+The Azure Kubernetes cluster not always runnning... contact me to demonstarte!

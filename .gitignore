@@ -41,3 +41,7 @@ testem.log
 .DS_Store
 Thumbs.db
 azure/domain/cert
+
+# Angular environments -> genrated by code
+.env
+environment.ts

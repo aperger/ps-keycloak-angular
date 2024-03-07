@@ -28,3 +28,10 @@ The second goal of this repository is to store the scripts ('azure' folder) and 
 * Certificates are generated with 'certbot' for Les't Encrypt ('azure/domain/cert' folder)
 
 The Azure Kubernetes cluster not always runnning... contact me to demonstarte!
+
+
+### Angular minor upgrade!
+
+```shell
+npx npm-check-updates --upgrade --target "minor" --filter "/@angular.*/"
+```

@@ -16,6 +16,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { initializeKeycloak } from './init/keycloak-init.factory';
 import { KeycloakTokenInterceptor } from './interceptors/keycloak-token-interceptor';
+import {MatMenuModule} from "@angular/material/menu";
 
 
 @NgModule({
@@ -25,20 +26,21 @@ import { KeycloakTokenInterceptor } from './interceptors/keycloak-token-intercep
     HomeComponent,
     ProfileComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    KeycloakAngularModule,
-    BrowserAnimationsModule,
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        KeycloakAngularModule,
+        BrowserAnimationsModule,
 
-    MatToolbarModule,
-    LayoutModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule
-  ],
+        MatToolbarModule,
+        LayoutModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
+        MatMenuModule
+    ],
   providers: [
     KeycloakService,
     {

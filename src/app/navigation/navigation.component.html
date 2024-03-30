@@ -3,8 +3,7 @@
   <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
     <!-- use a disabled button to provide padding for tree leaf -->
     <button mat-icon-button disabled></button>
-    <span *ngIf="!node.url">{{node.name}}</span>
-    <a [routerLink]="[node.url]" *ngIf="node.url" mat-button>{{node.name}}</a>
+    <a [routerLink]="[node.url]" mat-button [disabled]="!node.url">{{node.name}}</a>
 
   </mat-tree-node>
   <!-- This is the tree node template for expandable nodes -->
@@ -15,7 +14,7 @@
         {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
       </mat-icon>
     </button>
-    <span *ngIf="!node.url">{{node.name}}</span>
-    <a [routerLink]="[node.url]" *ngIf="node.url" mat-button>{{node.name}}</a>
+    <a [routerLink]="[node.url]" mat-button [disabled]="!node.url">{{node.name}}</a>
+
   </mat-tree-node>
 </mat-tree>

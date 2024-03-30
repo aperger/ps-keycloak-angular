@@ -1,8 +1,39 @@
-import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
-import { ResourceServerService } from '../services/resource-server.service';
+import {Component} from '@angular/core';
+import {MatTreeFlatDataSource, MatTreeFlattener} from "@angular/material/tree";
+import {FlatTreeControl} from "@angular/cdk/tree";
+
+
+interface FoodNode {
+  name: string;
+  children?: FoodNode[];
+}
+
+const TREE_DATA: FoodNode[] = [
+  {
+    name: 'Fruit',
+    children: [{name: 'Apple'}, {name: 'Banana'}, {name: 'Fruit loops'}],
+  },
+  {
+    name: 'Vegetables',
+    children: [
+      {
+        name: 'Green',
+        children: [{name: 'Broccoli'}, {name: 'Brussels sprouts'}],
+      },
+      {
+        name: 'Orange',
+        children: [{name: 'Pumpkins'}, {name: 'Carrots'}],
+      },
+    ],
+  },
+];
+
+/** Flat node with expandable and level information */
+interface ExampleFlatNode {
+  expandable: boolean;
+  name: string;
+  level: number;
+}
 
 @Component({
   selector: 'app-navigation',
@@ -10,32 +41,31 @@ import { ResourceServerService } from '../services/resource-server.service';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent {
+  private _transformer = (node: FoodNode, level: number) => {
+    return {
+      expandable: !!node.children && node.children.length > 0,
+      name: node.name,
+      level: level,
+    };
+  };
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-  .pipe(
-    map(result => result.matches),
-    shareReplay()
+  treeControl = new FlatTreeControl<ExampleFlatNode>(
+    node => node.level,
+    node => node.expandable,
   );
 
-  response = '';
+  treeFlattener = new MatTreeFlattener(
+    this._transformer,
+    node => node.level,
+    node => node.expandable,
+    node => node.children,
+  );
 
-  constructor(
-    private breakpointObserver: BreakpointObserver,
-    private service: ResourceServerService) {} 
+  dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-  onClickelcom1() {
-    const url = 'https://ps-reactive-api.azurewebsites.net/api/message/welcome';
-    this.service.getText(url).subscribe(response => {
-      this.response = response;
-    })
+  constructor() {
+    this.dataSource.data = TREE_DATA;
   }
 
-  onClickelcom2() {
-    const url = 'https://ps-servlet-api.azurewebsites.net/api/message/welcome';
-    this.service.getText(url).subscribe(response => {
-      this.response = response;
-    })
-  }
-
-
+  hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 }

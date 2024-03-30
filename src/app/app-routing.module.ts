@@ -7,7 +7,6 @@ import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'app', component: NavigationComponent, canActivate: [AuthGuard], },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], },
   { path: '**', redirectTo: '' }
 ];

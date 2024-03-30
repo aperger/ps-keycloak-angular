@@ -7,7 +7,6 @@
 
 
   <a *ngIf="isLoggedIn" mat-button [routerLink]="['home']">Home</a>
-  <a *ngIf="isLoggedIn" mat-button [routerLink]="['app']">App</a>
   <a *ngIf="isLoggedIn" mat-button [routerLink]="['profile']">Profile</a>
 
   <div class="toolbar-login-container">
@@ -17,15 +16,10 @@
 </mat-toolbar>
 <mat-drawer-container class="h-100" autosize>
   <mat-drawer #drawer opened mode="side">
-    <mat-nav-list *ngIf="isLoggedIn" >
-      <a mat-list-item [routerLink]="['home']">Home</a>
-      <a mat-list-item [routerLink]="['app']">App</a>
-      <a mat-list-item [routerLink]="['profile']">Profile</a>
-    </mat-nav-list>
+    <app-navigation></app-navigation>
   </mat-drawer>
 
   <div class="sidenav-content">
-
     <div class="container" *ngIf="isLoggedIn">
       <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
       <router-outlet></router-outlet>

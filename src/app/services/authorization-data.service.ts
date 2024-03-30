@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {KeycloakService} from "keycloak-angular";
-import {Subject} from "rxjs";
+import {of, Subject} from "rxjs";
 import {KeycloakLoginOptions} from "keycloak-js";
 import {AppUrlService} from "./app-url.service";
 import {MenuItem} from "../models/MenuItem";
@@ -90,6 +90,6 @@ export class AuthorizationDataService {
         ]
       }
     ];
-    return menuItems;
+    return of(menuItems);
   }
 }

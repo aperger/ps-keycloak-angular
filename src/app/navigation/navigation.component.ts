@@ -42,8 +42,9 @@ export class NavigationComponent {
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
   constructor(private authSrv: AuthorizationDataService) {
-    this.dataSource.data = authSrv.getMenuItems();
-    console.log(this.dataSource.data)
+    authSrv.getMenuItems().subscribe(menuitems => {
+      this.dataSource.data = menuitems;
+    });
   }
 
   hasChild = (_: number, node: FlatNode) => node.expandable;

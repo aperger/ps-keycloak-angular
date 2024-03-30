@@ -16,7 +16,7 @@
 </mat-toolbar>
 <mat-drawer-container class="h-100" autosize>
   <mat-drawer #drawer opened mode="side">
-    <app-navigation></app-navigation>
+    <app-navigation *ngIf="isLoggedIn"></app-navigation>
   </mat-drawer>
 
   <div class="sidenav-content">

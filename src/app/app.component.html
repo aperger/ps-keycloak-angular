@@ -1,3 +1,7 @@
+<style>
+  #sidebar {
+  }
+</style>
 <mat-toolbar color="primary">
   <button type="button" mat-icon-button (click)="drawer.toggle()" *ngIf="isLoggedIn" >
     <mat-icon  aria-hidden="false" fontIcon="menu"></mat-icon>
@@ -14,7 +18,7 @@
     <button mat-raised-button *ngIf="isLoggedIn" (click)="logout()" style="margin-left: 0.5em;">Logout</button>
   </div>
 </mat-toolbar>
-<mat-drawer-container class="h-100" autosize>
+<mat-drawer-container autosize id="sidebar">
   <mat-drawer #drawer opened mode="side">
     <app-navigation *ngIf="isLoggedIn"></app-navigation>
   </mat-drawer>

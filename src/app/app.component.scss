@@ -1,14 +1,19 @@
 .toolbar-login-container {
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
-    align-items: last baseline;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
 }
+
 #sidebar {
   height: 100vh; /* Sets the container height to 100% of the viewport height */
 }
 
-img#toolbar-logo{
-  height: 80px;
-  margin-top: -15px;
+#header_toolbar {
+  .logo {
+    height: 80px;
+    margin-top: -15px;
+  }
 }
+

@@ -1,21 +1,17 @@
-<style>
-  #sidebar {
-  }
-</style>
-<mat-toolbar color="primary">
-  <button type="button" mat-icon-button (click)="drawer.toggle()" *ngIf="isLoggedIn" >
-    <mat-icon  aria-hidden="false" fontIcon="menu"></mat-icon>
+<mat-toolbar color="primary" id="header_toolbar">
+  <button type="button" mat-icon-button (click)="drawer.toggle()" *ngIf="isLoggedIn">
+    <mat-icon aria-hidden="false" fontIcon="menu"></mat-icon>
   </button>
-    <a class="title" href="/"><img src="/assets/images/logo.png" id="toolbar-logo"
-                                   class="p-3"></a>
-
-
-  <a *ngIf="isLoggedIn" mat-button [routerLink]="['home']">Home</a>
-  <a *ngIf="isLoggedIn" mat-button [routerLink]="['profile']">Profile</a>
+  <a class="title" href="/"><img src="/assets/images/logo.png" class="logo"></a>
 
   <div class="toolbar-login-container">
     <button mat-raised-button *ngIf="!isLoggedIn" (click)="login()">Login</button>
-    <button mat-raised-button *ngIf="isLoggedIn" (click)="logout()" style="margin-left: 0.5em;">Logout</button>
+    <button type="button" mat-icon-button [routerLink]="['profile']" *ngIf="isLoggedIn">
+      <mat-icon aria-hidden="false" fontIcon="settings"></mat-icon>
+    </button>
+    <button type="button" mat-icon-button (click)="logout()" *ngIf="isLoggedIn">
+      <mat-icon aria-hidden="false" fontIcon="logout"></mat-icon>
+    </button>
   </div>
 </mat-toolbar>
 <mat-drawer-container autosize id="sidebar">

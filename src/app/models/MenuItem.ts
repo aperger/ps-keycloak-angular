@@ -1,11 +1,13 @@
 export class MenuItem {
   name: string;
+  icon: string;
   url?: string;
   children?: MenuItem[]
 
-  constructor(name: string, url: string, children?: MenuItem[]) {
+  constructor(name: string, icon: string, url: string, children?: MenuItem[]) {
     this.name = name;
-    if(url){
+    this.icon = icon;
+    if (url) {
       this.url = url;
     }
     if (children) {

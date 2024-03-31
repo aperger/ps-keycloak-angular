@@ -8,6 +8,7 @@ import {AuthorizationDataService} from "../services/authorization-data.service";
 interface FlatNode {
   expandable: boolean;
   name: string;
+  icon: string;
   level: number;
   url: string | undefined;
 }
@@ -22,6 +23,7 @@ export class NavigationComponent {
     return {
       expandable: !!node.children && node.children.length > 0,
       name: node.name,
+      icon: node.icon,
       level: level,
       url: node.url
     };

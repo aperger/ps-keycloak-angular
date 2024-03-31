@@ -2,9 +2,11 @@
   <button type="button" mat-icon-button (click)="drawer.toggle()" *ngIf="isLoggedIn">
     <mat-icon aria-hidden="false" fontIcon="menu"></mat-icon>
   </button>
-  <a class="title" href="/"><img src="/assets/images/logo.png" class="logo"></a>
+  <a class="logo" href="/"><img src="/assets/images/logo.png" class="logo"></a>
+  <span>{{title}}</span>
 
   <div class="toolbar-login-container">
+    <span>Minta János</span>
     <button mat-raised-button *ngIf="!isLoggedIn" (click)="login()">Login</button>
     <button type="button" mat-icon-button [routerLink]="['profile']" *ngIf="isLoggedIn">
       <mat-icon aria-hidden="false" fontIcon="settings"></mat-icon>

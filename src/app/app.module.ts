@@ -16,8 +16,17 @@ import { ProfileComponent } from './profile/profile.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { initializeKeycloak } from './init/keycloak-init.factory';
 import { KeycloakTokenInterceptor } from './interceptors/keycloak-token-interceptor';
-import {MatMenuModule} from "@angular/material/menu";
-import {MatTreeModule} from "@angular/material/tree";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatTreeModule } from "@angular/material/tree";
+import { TableWrapperComponent } from './components/table-wrapper/table-wrapper.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -25,7 +34,8 @@ import {MatTreeModule} from "@angular/material/tree";
     AppComponent,
     NavigationComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    TableWrapperComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +43,8 @@ import {MatTreeModule} from "@angular/material/tree";
     HttpClientModule,
     KeycloakAngularModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
 
     MatToolbarModule,
     LayoutModule,
@@ -41,7 +53,14 @@ import {MatTreeModule} from "@angular/material/tree";
     MatIconModule,
     MatListModule,
     MatMenuModule,
-    MatTreeModule
+    MatTreeModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
     KeycloakService,

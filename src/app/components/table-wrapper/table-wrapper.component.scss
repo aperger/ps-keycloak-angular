@@ -1,0 +1,76 @@
+
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+.table-container table {
+    width: 100%;
+    overflow: auto;
+}
+
+:host ::ng-deep mat-form-field > div > div.mat-form-field-flex > div,
+:host ::ng-deep .mat-form-field-type-mat-date-range-input .mat-form-field-infix {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+/* align colums */
+:host ::ng-deep th.mat-header-cell, 
+:host ::ng-deep td.mat-cell, 
+:host ::ng-deep td.mat-footer-cell
+:host ::ng-deep .mat-cell {
+    padding: 0 10px 0 0!important;
+}
+:host ::ng-deep th.mat-header-cell:first-of-type, 
+:host ::ng-deep td.mat-cell:first-of-type, 
+:host ::ng-deep td.mat-footer-cell:first-of-type {
+    padding: 0 10px 0 10px!important;
+}
+
+/* Date range picker changes in header */
+:host ::ng-deep mat-datepicker-toggle > button {
+    height: 15px;
+    width: 20px;
+}
+:host ::ng-deep mat-datepicker-toggle > button > span.mat-button-wrapper > svg {
+    height: 15px;   
+}
+
+.close_icon {
+    font-size: 15px!important;
+    height: 15px!important;
+    width: 15px!important; 
+}
+
+.header-cell {
+    display: flex;
+    flex-direction: row;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.mat-row:hover {
+    background-color: beige;
+}
+
+.click-on-row {
+    cursor: pointer;
+    font-style: italic;
+    text-decoration: underline;
+    color: rgb(var(--daisy-color-primary-700));
+}
+
+.loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

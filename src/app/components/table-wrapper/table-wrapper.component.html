@@ -1,0 +1,72 @@
+<div class="view-wrapper">
+    <!-- div class="loading-shade"
+        *ngIf="isLoadingResults">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div -->
+    <mat-paginator class="table-paginator"
+       *ngIf="!hidePagination"
+        [length]="12"
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 25]"
+        (page)="onLoadPage($event)"
+        [pageIndex]="0"
+        showFirstLastButtons
+        >
+    </mat-paginator>
+    <div class="table-container">
+      <table mat-table matSort matSortActive="id" matSortDisableClear matSortDirection="desc"
+      [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container *ngFor="let column of columns; index as index" [matColumnDef]="column.fieldName">
+          <form [formGroup]="filterForm">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header A="column.sortable ? column.fieldName : false" disableClear [disabled]="column.sortDisabled===true">
+              <div class="header-cell">
+
+                <mat-form-field *ngIf="showFilter && !!column.filterable && column.fieldType==='text'" class="full-width">
+                  <mat-label>{{column.title}}</mat-label>
+                  <input matInput formControlName="{{ column.fieldName }}" type="text" [name]="column.fieldName"
+                      (input)="onFilterTextInput($event, column, filterInputTimeout)"
+                      (change)="onFilterTextInput($event, column, filterInputTimeout)"
+                      (click)="onClickStopPropagation($event)">
+                </mat-form-field>
+                <mat-form-field *ngIf="showFilter && !!column.filterable && column.fieldType==='numeric'" class="full-width">
+                  <mat-label>{{column.title}}</mat-label>
+                  <input matInput formControlName="{{ column.fieldName }}" type="text" [name]="column.fieldName"
+                      (input)="onFilterTextInput($event, column, filterInputTimeout)"
+                      (change)="onFilterTextInput($event, column, filterInputTimeout)"
+                      (keypress)="preventNonNumericCharacter($event)"
+                      (click)="onClickStopPropagation($event)">
+                </mat-form-field>
+                <mat-form-field *ngIf="showFilter &&!!column.filterable && (column.fieldType==='daterange' || column.fieldType==='datetimerange')" class="small-picker full-width">
+                  <mat-label>{{column.title}}</mat-label>
+                  <mat-date-range-input #r [rangePicker]="picker" (click)="onClickPiker(r, picker)">
+                    <input matStartDate formControlName="{{ column.fieldName + 'From' }}" placeholder="from" readonly (dateChange)="handleDateRangeChangeEvent(column.fieldName + 'From', column, $event)" (click)="onClickStopPropagation($event)">
+                    <input matEndDate formControlName="{{ column.fieldName + 'To' }}"  placeholder="to" readonly (dateChange)="handleDateRangeChangeEvent(column.fieldName + 'To', column, $event)" (click)="onClickStopPropagation($event)">
+                  </mat-date-range-input>
+                  <!-- mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint -->
+                  <mat-icon (click)="clearRanges($event, column.fieldName + 'From', column.fieldName + 'To')" class="close_icon">clear</mat-icon>
+                  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+                <mat-form-field _appearance="fill" *ngIf="showFilter && !!column.filterable && column.fieldType==='selection' && !!column.filterOptions" class="full-width">
+                  <mat-label>{{column.title}}</mat-label>
+                  <mat-select formControlName="{{ column.fieldName }}" placeholder="{{column.title}}" (click)="onClickStopPropagation($event)" _optionSelected_ (valueChange)="onFilterOptionChanged($event, column)">
+                    <mat-option></mat-option>
+                    <mat-option *ngFor="let pair of column.filterOptions" value="{{pair.key}}" _onSelectionChanged_ (selection)="onFilterTextInput($event, column, filterInputTimeout)">
+                      {{pair.value}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <!--span *ngIf="!column.filterable">{{column.title}}</span -->
+              </div>
+              <span *ngIf="!column.filterable">{{column.title}}</span>
+            </th>
+          </form>
+          <td mat-cell *matCellDef="let row" (click)="onRowClick(row, column, $event)" [ngClass]="{'click-on-row biege': !!column.allowRowClick}" >
+            {{column.cell(row)}}
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>

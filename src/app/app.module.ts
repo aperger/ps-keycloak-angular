@@ -20,6 +20,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatTreeModule} from "@angular/material/tree";
 import { UsersComponent } from './users/users.component';
 import { CompaniesComponent } from './companies/companies.component';
+import {MatTableModule} from "@angular/material/table";
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { CompaniesComponent } from './companies/companies.component';
     MatIconModule,
     MatListModule,
     MatMenuModule,
-    MatTreeModule
+    MatTreeModule,
+    MatTableModule
   ],
   providers: [
     KeycloakService,

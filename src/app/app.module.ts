@@ -18,6 +18,8 @@ import { initializeKeycloak } from './init/keycloak-init.factory';
 import { KeycloakTokenInterceptor } from './interceptors/keycloak-token-interceptor';
 import {MatMenuModule} from "@angular/material/menu";
 import {MatTreeModule} from "@angular/material/tree";
+import { UsersComponent } from './users/users.component';
+import { CompaniesComponent } from './companies/companies.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import {MatTreeModule} from "@angular/material/tree";
     AppComponent,
     NavigationComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    UsersComponent,
+    CompaniesComponent
   ],
   imports: [
     BrowserModule,

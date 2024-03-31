@@ -1,17 +1,21 @@
-<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-  <!-- This is the tree node template for leaf nodes -->
-  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
-    <a [routerLink]="[node.url]" mat-button [disabled]="!node.url"><mat-icon aria-hidden="false" [fontIcon]="node.icon"></mat-icon>{{node.name}}</a>
-  </mat-tree-node>
-  <!-- This is the tree node template for expandable nodes -->
-  <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
-    <button mat-icon-button matTreeNodeToggle
-            [attr.aria-label]="'Toggle ' + node.name">
-      <!--mat-icon class="mat-icon-rtl-mirror">
-        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-      </mat-icon-->
-    </button>
-    <a [routerLink]="[node.url]" mat-button [disabled]="!node.url">{{node.name}}</a>
+<div class="sidenav-container">
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <!-- This is the tree node template for leaf nodes -->
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+      <a [routerLink]="[node.url]" mat-button [disabled]="!node.url">
+        <mat-icon aria-hidden="false" [fontIcon]="node.icon"></mat-icon>
+        {{ node.name }}</a>
+    </mat-tree-node>
+    <!-- This is the tree node template for expandable nodes -->
+    <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+      <button mat-icon-button matTreeNodeToggle
+              [attr.aria-label]="'Toggle ' + node.name">
+        <!--mat-icon class="mat-icon-rtl-mirror">
+          {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+        </mat-icon-->
+      </button>
+      <a [routerLink]="[node.url]" mat-button [disabled]="!node.url">{{ node.name }}</a>
 
-  </mat-tree-node>
-</mat-tree>
+    </mat-tree-node>
+  </mat-tree>
+</div>

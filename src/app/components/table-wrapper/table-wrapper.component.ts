@@ -36,6 +36,7 @@ export class TableWrapperComponent implements OnInit, AfterViewInit {
     @Input() embeddedName: string = '';
     @Input() pageIndexParamName: string = 'page';
     @Input() pageSizeParamName: string = 'size';
+    @Input() defaultSortField: string = 'id';
     @Input() sortParamName: string = 'sort';
     @Input() columns: ColumnDefinition[];
     @Input() filterInputTimeout = 1000;

@@ -46,48 +46,14 @@ export class AuthorizationDataService {
   getMenuItems() {
     const menuItems: MenuItem[] = [
       {
-        name: 'Fruit',
-        children: [{
-          name: 'Apple'
-        }, {
-          name: 'Banana',
-          url: '/banana'
-        }, {
-          name: 'Fruit loops',
-          url: '/fruit-loops'
-        }],
+        name: 'Felhasználók',
+        icon: 'person',
+        url: '/felhasznalok'
       },
       {
-        name: 'Vegetables',
-        children: [
-          {
-            name: 'Green',
-            children: [
-              {
-                name: 'Broccoli',
-                url: '/broccoli'
-              },
-              {
-                name: 'Brussels sprouts',
-                url: '/brussels',
-              },
-            ]
-          },
-          {
-            name: 'Orange',
-            children: [
-              {
-                name: 'Pumpkins',
-                url: '/pumpkins'
-              },
-              {
-                name: 'Carrots',
-                url: '/profile'
-              }
-            ],
-            url: '/orange'
-          }
-        ]
+        name: 'Cégek',
+        icon: 'corporate_fare',
+        url: '/cegek'
       }
     ];
     return of(menuItems);

@@ -14,6 +14,7 @@ const setEnv = () => {
         KEYCLOAK_URL: '${process.env['KEYCLOAK_URL']}',
         KEYCLOAK_REALM: '${process.env['KEYCLOAK_REALM']}',
         KEYCLOAK_CLIENT_ID: '${process.env['KEYCLOAK_CLIENT_ID']}',
+        AXING_API_URL: '${process.env['AXING_API_URL']}',
         appVersion: '${appVersion}',
         production: ${process.env['PRODUCTION']},
     };`;

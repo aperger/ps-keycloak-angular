@@ -7,10 +7,23 @@
     overflow: auto;
 }
 
-:host ::ng-deep mat-form-field > div > div.mat-form-field-flex > div,
-:host ::ng-deep .mat-form-field-type-mat-date-range-input .mat-form-field-infix {
+:host ::ng-deep .mdc-text-field--filled,
+:host ::ng-deep .mdc-text-field--outlined,
+:host ::ng-deep .mdc-text-field__input,
+:host ::ng-deep .mdc-text-field {
+    background-color: unset!important;
+}
+
+:host ::ng-deep .mat-mdc-form-field-bottom-align {
+    display: none;
+}
+
+
+:host ::ng-deep mat-mdc-form-field > div > div.mat-mdc-form-field-flex > div,
+:host ::ng-deep .mat-mdc-form-field-infix {
     width: 100%;
     display: flex;
+    flex-grow: 1;
     flex-direction: row;
 }
 
@@ -28,7 +41,7 @@
 }
 
 /* Date range picker changes in header */
-:host ::ng-deep mat-datepicker-toggle > button {
+:host ::ng-deep mat-mdc-datepicker-toggle > button {
     height: 15px;
     width: 20px;
 }
@@ -45,6 +58,7 @@
 .header-cell {
     display: flex;
     flex-direction: row;
+    padding: 2px;
 }
 
 .full-width {

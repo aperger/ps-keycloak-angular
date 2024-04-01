@@ -14,14 +14,14 @@
         >
     </mat-paginator>
     <div class="table-container">
-      <table mat-table matSort matSortActive="id" matSortDisableClear matSortDirection="desc"
+      <table mat-table matSort [matSortActive]="defaultSortField" matSortDisableClear matSortDirection="desc"
       [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container *ngFor="let column of columns; index as index" [matColumnDef]="column.fieldName">
           <form [formGroup]="filterForm">
             <th mat-header-cell *matHeaderCellDef mat-sort-header A="column.sortable ? column.fieldName : false" disableClear [disabled]="column.sortDisabled===true">
               <div class="header-cell">
 
-                <mat-form-field *ngIf="showFilter && !!column.filterable && column.fieldType==='text'" class="full-width">
+                <mat-form-field *ngIf="showFilter && !!column.filterable && column.fieldType==='text'" class="full-width" appearance="fill">
                   <mat-label>{{column.title}}</mat-label>
                   <input matInput formControlName="{{ column.fieldName }}" type="text" [name]="column.fieldName"
                       (input)="onFilterTextInput($event, column, filterInputTimeout)"

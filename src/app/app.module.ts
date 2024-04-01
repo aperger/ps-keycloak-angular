@@ -23,10 +23,14 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
+import { UsersComponent } from './users/users.component';
+import { CompaniesComponent } from './companies/companies.component';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 
 @NgModule({
@@ -35,7 +39,11 @@ import { MatSortModule } from '@angular/material/sort';
     NavigationComponent,
     HomeComponent,
     ProfileComponent,
-    TableWrapperComponent
+    
+    TableWrapperComponent,
+
+    UsersComponent,
+    CompaniesComponent
   ],
   imports: [
     BrowserModule,
@@ -56,11 +64,13 @@ import { MatSortModule } from '@angular/material/sort';
     MatTreeModule,
     MatTableModule,
     MatFormFieldModule,
+    MatInputModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatSelectModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatMomentDateModule
   ],
   providers: [
     KeycloakService,

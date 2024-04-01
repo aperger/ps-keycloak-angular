@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthorizationDataService} from "./services/authorization-data.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-root',
@@ -8,15 +9,16 @@ import {AuthorizationDataService} from "./services/authorization-data.service";
 })
 export class AppComponent implements OnInit {
 
-  title = 'ps-keycloak-angular';
+  title = '';
 
   constructor(
-    private authSrv: AuthorizationDataService) {
+    private authSrv: AuthorizationDataService, private titleService: Title) {
   }
 
   private loggedIn = false;
 
   ngOnInit(): void {
+    this.titleService.setTitle('');
     this.authSrv.onLogin().subscribe(status => {
       this.loggedIn = status;
     });

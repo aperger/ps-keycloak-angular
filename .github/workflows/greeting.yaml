@@ -1,0 +1,17 @@
+on:
+  workflow_dispatch: {}
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: Greeting
+    steps:
+      - uses: actions/checkout@v4
+      - id: foo
+        uses: aperger/greeting-action@v1
+        with:
+          who-to-greet: 'Attila'
+      - run: echo random-number "$RANDOM_NUMBER"
+        shell: bash
+        env:
+          RANDOM_NUMBER: ${{ steps.foo.outputs.random-number }}

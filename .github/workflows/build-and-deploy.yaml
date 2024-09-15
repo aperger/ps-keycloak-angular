@@ -20,6 +20,12 @@ env:
         ./kubernetes/frontend-azure-ingress.yaml
         ./kubernetes/frontend-deployment-azure.yaml
         ./kubernetes/frontend-sevice.yaml
+    KEYCLOAK_URL: ${{ secrets.KEYCLOAK_URL }}
+    KEYCLOAK_REALM: ${{ secrets.KEYCLOAK_REALM }}
+    KEYCLOAK_CLIENT_ID: ${{ secrets.KEYCLOAK_CLIENT_ID }}
+    PRODUCTION: true
+    AXING_API_URL=: ${{ secrets.AXING_API_URL }}
+
 jobs:
     buildImage:
         permissions:

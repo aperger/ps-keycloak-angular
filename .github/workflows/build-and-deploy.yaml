@@ -32,7 +32,7 @@ jobs:
               with:
                 creds: ${{ secrets.AZURE_CREDENTIALS }}
             - name: Build and push image to ACR
-              run: az acr build --image ${{ env.CONTAINER_NAME }}:${{ inputs.tag }}" --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f ./Dockerfile ./
+              run: az acr build --image ${{ env.CONTAINER_NAME }}:${{ inputs.tag }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f ./Dockerfile ./
     deploy:
         permissions:
             actions: read
@@ -62,6 +62,6 @@ jobs:
               name: Deploys application
               with:
                 action: deploy
-                images: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ inputs.tag }}"
+                images: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ inputs.tag }}
                 manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
                 namespace: default

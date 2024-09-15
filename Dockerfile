@@ -1,5 +1,19 @@
 FROM node:latest as build
 
+ARG KEYCLOAK_URL
+ENV KEYCLOAK_URL=$KEYCLOAK_URL
+
+ARG KEYCLOAK_REALM   
+ENV KEYCLOAK_REALM=$KEYCLOAK_REALM
+
+ARG KEYCLOAK_CLIENT_ID  
+ENV KEYCLOAK_CLIENT_ID=$KEYCLOAK_CLIENT_ID
+
+ARG AXING_API_URL  
+ENV AXING_API_URL=$AXING_API_URL
+
+ENV PRODUCTION=true
+
 COPY . /workspace/
 
 RUN cd /workspace/                                                                       && \

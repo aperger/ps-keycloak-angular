@@ -20,11 +20,6 @@ env:
         ./kubernetes/frontend-azure-ingress.yaml
         ./kubernetes/frontend-deployment-azure.yaml
         ./kubernetes/frontend-sevice.yaml
-    KEYCLOAK_URL: ${{ secrets.KEYCLOAK_URL }}
-    KEYCLOAK_REALM: ${{ secrets.KEYCLOAK_REALM }}
-    KEYCLOAK_CLIENT_ID: ${{ secrets.KEYCLOAK_CLIENT_ID }}
-    PRODUCTION: true
-    AXING_API_URL: ${{ secrets.AXING_API_URL }}
 
 jobs:
     buildImage:
@@ -38,7 +33,14 @@ jobs:
               with:
                 creds: ${{ secrets.AZURE_CREDENTIALS }}
             - name: Build and push image to ACR
-              run: az acr build --image ${{ env.CONTAINER_NAME }}:${{ inputs.tag }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f ./Dockerfile ./
+              run: |
+                az acr build \
+                  --build-arg KEYCLOAK_URL=${{ secrets.KEYCLOAK_URL }} \ 
+                  --build-arg KEYCLOAK_REALM=${{ secrets.KEYCLOAK_REALM }} \
+                  --build-arg KEYCLOAK_CLIENT_ID=${{ secrets.KEYCLOAK_CLIENT_ID }} \ 
+                  --build-arg AXING_API_URL=${{ secrets.AXING_API_URL }} \
+                  --image ${{ env.CONTAINER_NAME }}:${{ inputs.tag }} \
+                  --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f ./Dockerfile ./
     deploy:
         permissions:
             actions: read

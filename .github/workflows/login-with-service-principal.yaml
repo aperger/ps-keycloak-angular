@@ -4,7 +4,7 @@ on:
 
 jobs:
 
-  build-and-deploy:
+  login-and-show-deatils:
     runs-on: ubuntu-latest
     steps:
 

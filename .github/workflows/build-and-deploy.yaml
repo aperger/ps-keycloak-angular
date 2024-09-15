@@ -1,9 +1,15 @@
-name: Deploy (generated)
+name: Build and Deploy
+run-name: Build and Deploy v${{ github.event.inputs.tag }}
 on:
     # push:
     #     branches:
     #         - main
-    workflow_dispatch: {}
+    workflow_dispatch:
+      inputs:
+        tag:
+          description: "Release version/tag"
+          type: string
+          required: true
 env:
     ACR_RESOURCE_GROUP: rg_kubernetes
     AZURE_CONTAINER_REGISTRY: acrpegersoft
@@ -22,14 +28,11 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
-            - uses: azure/login@92a5484dfaf04ca78a94597f4f19fea633851fa2
-              name: Azure login
+            - uses: azure/login@v2
               with:
-                client-id: ${{ secrets.AZURE_CLIENT_ID }}
-                subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-                tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+                creds: ${{ secrets.AZURE_CREDENTIALS }}
             - name: Build and push image to ACR
-              run: az acr build --image ${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f ./Dockerfile ./
+              run: az acr build --image ${{ env.CONTAINER_NAME }}:${{ inputs.tag }}" --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f ./Dockerfile ./
     deploy:
         permissions:
             actions: read
@@ -40,12 +43,10 @@ jobs:
             - buildImage
         steps:
             - uses: actions/checkout@v3
-            - uses: azure/login@92a5484dfaf04ca78a94597f4f19fea633851fa2
-              name: Azure login
+            - uses: azure/login@v2
               with:
-                client-id: ${{ secrets.AZURE_CLIENT_ID }}
-                subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-                tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+                creds: ${{ secrets.AZURE_CREDENTIALS }}
+
             - uses: azure/use-kubelogin@v1
               name: Set up kubelogin for non-interactive login
               with:
@@ -61,6 +62,6 @@ jobs:
               name: Deploys application
               with:
                 action: deploy
-                images: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
+                images: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ inputs.tag }}"
                 manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
                 namespace: default

@@ -33,14 +33,8 @@ jobs:
               with:
                 creds: ${{ secrets.AZURE_CREDENTIALS }}
             - name: Build and push image to ACR
-              run: |
-                az acr build \
-                  --build-arg KEYCLOAK_URL=${{ secrets.KEYCLOAK_URL }} \ 
-                  --build-arg KEYCLOAK_REALM=${{ secrets.KEYCLOAK_REALM }} \
-                  --build-arg KEYCLOAK_CLIENT_ID=${{ secrets.KEYCLOAK_CLIENT_ID }} \ 
-                  --build-arg AXING_API_URL=${{ secrets.AXING_API_URL }} \
-                  --image ${{ env.CONTAINER_NAME }}:${{ inputs.tag }} \
-                  --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f ./Dockerfile ./
+              run: az acr build --build-arg KEYCLOAK_URL=${{ secrets.KEYCLOAK_URL }} --build-arg KEYCLOAK_REALM=${{ secrets.KEYCLOAK_REALM }} --build-arg KEYCLOAK_CLIENT_ID=${{ secrets.KEYCLOAK_CLIENT_ID }} --build-arg AXING_API_URL=${{ secrets.AXING_API_URL }} --image ${{ env.CONTAINER_NAME }}:${{ inputs.tag }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f ./Dockerfile ./
+
     deploy:
         permissions:
             actions: read
@@ -54,7 +48,6 @@ jobs:
             - uses: azure/login@v2
               with:
                 creds: ${{ secrets.AZURE_CREDENTIALS }}
-
             - uses: azure/use-kubelogin@v1
               name: Set up kubelogin for non-interactive login
               with:

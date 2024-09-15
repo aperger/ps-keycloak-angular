@@ -24,7 +24,7 @@ env:
     KEYCLOAK_REALM: ${{ secrets.KEYCLOAK_REALM }}
     KEYCLOAK_CLIENT_ID: ${{ secrets.KEYCLOAK_CLIENT_ID }}
     PRODUCTION: true
-    AXING_API_URL=: ${{ secrets.AXING_API_URL }}
+    AXING_API_URL: ${{ secrets.AXING_API_URL }}
 
 jobs:
     buildImage:

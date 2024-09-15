@@ -1,4 +1,4 @@
-name: generated-deploy
+name: Deploy (generated)
 "on":
     push:
         branches:

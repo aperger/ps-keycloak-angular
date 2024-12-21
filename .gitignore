@@ -43,5 +43,5 @@ Thumbs.db
 azure/domain/cert
 
 # Angular environments -> genrated by code
-.env
+.env*
 environment.ts

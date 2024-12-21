@@ -6,7 +6,7 @@
   <span>{{title}}</span>
 
   <div class="toolbar-login-container">
-    <span>Minta János</span>
+    <span *ngIf="isLoggedIn">{{profile?.family_name}}, {{profile?.given_name}}</span>
     <button mat-raised-button *ngIf="!isLoggedIn" (click)="login()">Login</button>
     <button type="button" mat-icon-button [routerLink]="['profile']" *ngIf="isLoggedIn">
       <mat-icon aria-hidden="false" fontIcon="settings"></mat-icon>

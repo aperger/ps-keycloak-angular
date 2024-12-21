@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthorizationDataService} from "./services/authorization-data.service";
+import {AuthorizationDataService, KeycloakUserInfo} from "./services/authorization-data.service";
 import {Title} from "@angular/platform-browser";
 
 @Component({
@@ -16,11 +16,13 @@ export class AppComponent implements OnInit {
   }
 
   private loggedIn = false;
+  public profile: KeycloakUserInfo | null = null;
 
   ngOnInit(): void {
     this.titleService.setTitle('');
     this.authSrv.onLogin().subscribe(status => {
       this.loggedIn = status;
+      this.profile = this.authSrv.profile;
     });
   }
 

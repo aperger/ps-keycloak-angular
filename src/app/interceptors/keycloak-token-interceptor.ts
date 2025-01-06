@@ -16,8 +16,6 @@ export class KeycloakTokenInterceptor implements HttpInterceptor {
         if (!token && shallPass) {
             return next.handle(request);
         }
-
-		
 		console.log(this.kcService.excludedUrls);
 		return this.kcService.addTokenToHeader(request.headers).pipe(switchMap<HttpHeaders, ObservableInput<HttpEvent<any>>>((headersWithBearer) => {
 			request = request.clone({ headers: headersWithBearer })

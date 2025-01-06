@@ -1,8 +1,124 @@
 @use '@angular/material' as mat;
 
 @include mat.core();
-// Define your custom green palette
-$my-palette: (
+
+$m2-blue: (
+    50 : #e7ecff,
+    100 : #c3cfff,
+    200 : #9bafff,
+    300 : #738fff,
+    400 : #5577ff,
+    500 : #375fff,
+    600 : #3157ff,
+    700 : #2a4dff,
+    800 : #2343ff,
+    900 : #1632ff,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #e2e9ff,
+    A700 : #c9d5ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$m2-organge: (
+  50 : #ffede0,
+  100 : #fed1b3,
+  200 : #feb380,
+  300 : #fd954d,
+  400 : #fc7e26,
+  500 : #fc6700,
+  600 : #fc5f00,
+  700 : #fb5400,
+  800 : #fb4a00,
+  900 : #fa3900,
+  A100 : #ffffff,
+  A200 : #ffffff,
+  A400 : #ffffff,
+  A700 : #ffe6e6,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #000000,
+      500 : #000000,
+      600 : #000000,
+      700 : #ffffff,
+      800 : #ffffff,
+      900 : #ffffff,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #000000,
+  )
+);
+
+$m2-red: (
+    50 : #f7e4e4,
+    100 : #eababa,
+    200 : #dd8d8d,
+    300 : #cf5f5f,
+    400 : #c43c3c,
+    500 : #ba1a1a,
+    600 : #b31717,
+    700 : #ab1313,
+    800 : #a30f0f,
+    900 : #940808,
+    A100 : #ffd5dd,
+    A200 : #ffa2b4,
+    A400 : #ff6f8a,
+    A700 : #ff5576,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+// Define your light theme using the custom green palette
+$light-theme: mat.define-light-theme(
+    (
+      color: (
+        primary: mat.define-palette($m2-blue, 400),
+        accent: mat.define-palette($m2-organge, 500),
+        warn: mat.define-palette($m2-red, 600),
+      ),
+      typography: mat.define-typography-config(),
+      density: 0, // Adjust density if needed
+    )
+);
+
+@include mat.all-component-themes($light-theme);
+
+
+// Define AXING green palette
+/*$my-palette: (
   50: #E8F5E9,
   100: #C8E6C9,
   200: #A5D6A7,
@@ -35,6 +151,4 @@ $light-theme: mat.define-light-theme(
       density: 0, // Adjust density if needed
     )
 );
-
-@include mat.all-component-themes($light-theme);
-
+*/

@@ -57,11 +57,18 @@ export class AuthorizationDataService {
   }
 
 
-  login(): Promise<void> {
+  async login(): Promise<void> {
     const options: KeycloakLoginOptions = {
       locale: 'hu'
     }
-    return this.keycloakService.login();
+    await this.keycloakService.login();
+    const status = await this.keycloakService.isLoggedIn();
+    if (status) {
+      this.getUserInfo().subscribe(profile => {
+        this.keycloakProfile = profile;
+        this.notifyLogin(status);
+      });
+    }
   }
 
   logout(): Promise<void> {
@@ -85,7 +92,7 @@ export class AuthorizationDataService {
   }
 
   getUserInfo() {
-    let absoluteUrl = `${environment.KEYCLOAK_URL}/realms/pssecurity/protocol/openid-connect/userinfo`
+    let absoluteUrl = `${environment.KEYCLOAK_URL}/realms/${environment.KEYCLOAK_REALM}/protocol/openid-connect/userinfo`
     return this.httpClient.get<KeycloakUserInfo>(absoluteUrl);
   }
 

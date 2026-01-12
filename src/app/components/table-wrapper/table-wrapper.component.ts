@@ -34,8 +34,8 @@ export class TableWrapperComponent implements OnInit, AfterViewInit {
     @Input() dataSource: any[];
     @Input() restApiurl: string;
     @Input() embeddedName: string = '';
-    @Input() pageIndexParamName: string = 'page';
-    @Input() pageSizeParamName: string = 'size';
+    @Input() pageIndexParamName: string = 'pageIndex';
+    @Input() pageSizeParamName: string = 'pageSize';
     @Input() defaultSortField: string = 'id';
     @Input() sortParamName: string = 'sort';
     @Input() columns: ColumnDefinition[];
@@ -144,11 +144,38 @@ export class TableWrapperComponent implements OnInit, AfterViewInit {
                     // Only refresh the result length if there is new data. In case of rate
                     // limit errors, we do not want to reset the paginator to zero, as that
                     // would prevent users from re-triggering requests.
-                    let page = !!data.page ? data.page : data;
+
+                    let page: PageDetails;
+                    if (!!data.pagination) {
+                        let pagination: {
+                            offset: number, 
+                            limit: number,
+                            pageIndex: number,
+                            pageSize: number,
+                            totalElements: number,
+                            hasMore: boolean,
+                            totalPages: number
+                        } = data.pagination;
+                        page = {
+                            size: pagination.pageSize,
+                            totalElements: pagination.totalElements,
+                            totalPages: pagination.totalPages,
+                            number: pagination.pageIndex
+                        };
+                    } else if (!!data.page) {
+                        page = data.page;
+                    } else {
+                        this.paginator.length = 0;
+                        this.paginator.pageSize = 0;
+                        return [];
+                    }
 
                     this.paginator.length = page.totalElements;
                     this.onLoadPage({ pageIndex: page.number, pageSize: page.size, length: page.totalElements });
                     let elements = data;
+                    if (data.data) {
+                        elements = data.data;
+                    } else 
                     if (data.content) {
                         elements = data.content;
                     } else if (data._embedded) {
@@ -330,5 +357,4 @@ export interface PageDetails {
     totalElements: number;
     totalPages: number;
     number: number;
-
 }

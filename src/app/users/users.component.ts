@@ -31,7 +31,7 @@ export class UsersComponent {
             fieldType: 'text',
             title: 'Felhasználónév',
             filterable: false,
-            cell: (element: any) => element.userId
+            cell: (element: any) => element.id
         },
         {
             fieldName: 'name',

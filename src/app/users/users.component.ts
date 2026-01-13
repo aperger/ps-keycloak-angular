@@ -10,27 +10,19 @@ export interface PeriodicElement {
     symbol: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-    { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-    { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' }
-];
-
 @Component({
     selector: 'app-users',
     templateUrl: './users.component.html',
     styleUrls: ['./users.component.scss']
 })
 export class UsersComponent {
-    
-    displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-    dataSource = ELEMENT_DATA;
-
+ 
     columns: ColumnDefinition[] = [
         {
-            fieldName: 'userId',
+            fieldName: 'id',
             fieldType: 'text',
             title: 'Felhasználónév',
-            filterable: false,
+            filterable: true,
             cell: (element: any) => element.id
         },
         {

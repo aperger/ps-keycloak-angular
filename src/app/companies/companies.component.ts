@@ -3,25 +3,13 @@ import { Title } from "@angular/platform-browser";
 import { ColumnDefinition } from '../components/table-wrapper/table-wrapper.component';
 import { environment } from 'src/environments/environment';
 
-export interface PeriodicElement {
-    name: string;
-    position: number;
-    weight: number;
-    symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-    { position: 1, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-    { position: 2, name: 'Neon', weight: 20.1797, symbol: 'Ne' }
-];
 @Component({
     selector: 'app-companies',
     templateUrl: './companies.component.html',
     styleUrls: ['./companies.component.scss']
 })
 export class CompaniesComponent {
-    displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-    dataSource = ELEMENT_DATA;
+
     columns: ColumnDefinition[] = [
         {
             fieldName: 'id',
@@ -59,7 +47,6 @@ export class CompaniesComponent {
             cell: (element: any) => element.address
         }
     ];
-    embeddedName = 'companies';
     urlCompanies = environment.AXING_API_URL + 'companies';
 
     constructor(private titleService: Title) { }

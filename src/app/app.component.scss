@@ -7,12 +7,18 @@
 }
 
 #sidebar {
-  height: 100vh; /* Sets the container height to 100% of the viewport height */
+  height: calc(100vh - 70px); /* Sets the container height to 100% of the viewport height minus the header height */
 }
 
 #header_toolbar {
   .logo {
     height: 70px;
+    img {
+      height: 60px;
+      color: white;
+      padding: 5px 0 0 0;
+    }
+    
   }
 }
 

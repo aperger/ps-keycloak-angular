@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { Title } from "@angular/platform-browser";
-import { ColumnDefinition } from '../components/table-wrapper/table-wrapper.component';
+import { ColumnDefinition } from '../table-wrapper/table-wrapper.component';
 import { environment } from 'src/environments/environment';
 
 @Component({
-    selector: 'app-companies',
-    templateUrl: './companies.component.html',
-    styleUrls: ['./companies.component.scss']
+    selector: 'app-sites',
+    templateUrl: './sites.component.html',
+    styleUrls: ['./sites.component.scss']
 })
-export class CompaniesComponent {
+export class SitesComponent {
 
     columns: ColumnDefinition[] = [
         {
@@ -47,11 +47,11 @@ export class CompaniesComponent {
             cell: (element: any) => element.address
         }
     ];
-    urlCompanies = environment.AXING_API_URL + 'companies';
+    urlSites = environment.AXING_API_URL + 'sites';
 
     constructor(private titleService: Title) { }
 
     ngOnInit(): void {
-        this.titleService.setTitle('Cégek');
+        this.titleService.setTitle('Telephelyek');
     }
 }

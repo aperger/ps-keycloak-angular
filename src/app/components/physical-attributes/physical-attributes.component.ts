@@ -1,27 +1,20 @@
 import { Component } from '@angular/core';
 import { Title } from "@angular/platform-browser";
-import { ColumnDefinition } from '../components/table-wrapper/table-wrapper.component';
+import { ColumnDefinition } from '../table-wrapper/table-wrapper.component';
 import { environment } from 'src/environments/environment';
 
-export interface PeriodicElement {
-    name: string;
-    position: number;
-    weight: number;
-    symbol: string;
-}
-
 @Component({
-    selector: 'app-users',
-    templateUrl: './users.component.html',
-    styleUrls: ['./users.component.scss']
+    selector: 'app-physical-attributes',
+    templateUrl: './physical-attributes.component.html',
+    styleUrls: ['./physical-attributes.component.scss']
 })
-export class UsersComponent {
- 
+export class PhysicalAttributesComponent {
+
     columns: ColumnDefinition[] = [
         {
             fieldName: 'id',
-            fieldType: 'text',
-            title: 'Felhasználónév',
+            fieldType: 'numeric',
+            title: '#',
             filterable: true,
             cell: (element: any) => element.id
         },
@@ -33,20 +26,18 @@ export class UsersComponent {
             cell: (element: any) => element.name
         },
         {
-            fieldName: 'email',
+            fieldName: 'unitName',
             fieldType: 'text',
-            title: 'E-mail',
+            title: 'Mértékegység',
             filterable: true,
-            cell: (element: any) => element.email
+            cell: (element: any) => element.unitName
         }
     ];
-    embeddedName = 'users';
-    urlUsers =  environment.AXING_API_URL + 'users';
-    
+    url = environment.AXING_API_URL + 'physical-attributes';
+
     constructor(private titleService: Title) { }
 
     ngOnInit(): void {
-        this.titleService.setTitle('Felhasználók');
+        this.titleService.setTitle('Fizikai jellemzők');
     }
-
 }

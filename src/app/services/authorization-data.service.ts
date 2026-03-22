@@ -86,6 +86,31 @@ export class AuthorizationDataService {
         name: 'Cégek',
         icon: 'corporate_fare',
         url: '/cegek'
+      },
+      {
+        name: 'Telephelyek',
+        icon: 'location_on',
+        url: '/telephelyek'
+      },
+      {
+        name: 'Mérési pontok',
+        icon: 'engineering',
+        url: '/meresi-pontok'
+      },
+      {
+        name: 'Fizikai jellemzők',
+        icon: 'fitness_center',
+        url: '/fizikai-jellemzok'
+      },
+      {
+        name: 'Mérési paraméterek',
+        icon: 'tune',
+        url: '/meresi-parameterek'
+      },
+      {
+        name: 'Mért adatok',
+        icon: 'data_usage',
+        url: '/mert-adatok'
       }
     ];
     return of(menuItems);

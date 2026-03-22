@@ -114,11 +114,8 @@ $light-theme: mat.define-light-theme(
     )
 );
 
-@include mat.all-component-themes($light-theme);
-
-
-// Define AXING green palette
-/*$my-palette: (
+// AXING green palette
+$axing-palette: (
   50: #E8F5E9,
   100: #C8E6C9,
   200: #A5D6A7,
@@ -134,21 +131,36 @@ $light-theme: mat.define-light-theme(
   A400: #00E676,
   A700: #00C853,
   contrast: (
-    50: rgba(#000000, 0.1),
-    // Adjust contrast colors as needed
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
   )
 );
 
-// Define your light theme using the custom green palette
-$light-theme: mat.define-light-theme(
-    (
-      color: (
-        primary: mat.define-palette($my-palette, 500),
-        accent: mat.define-palette($my-palette, 100),
-        warn: mat.define-palette($my-palette, 400),
-      ),
-      typography: mat.define-typography-config(),
-      density: 0, // Adjust density if needed
-    )
+$axing-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: mat.define-palette($axing-palette, 500),
+      accent: mat.define-palette($axing-palette, 200),
+      warn: mat.define-palette($m2-red, 600),
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
 );
-*/
+
+// To switch the app to AXING theme, replace:
+// @include mat.all-component-themes($light-theme);
+// with:
+@include mat.all-component-themes($axing-theme);

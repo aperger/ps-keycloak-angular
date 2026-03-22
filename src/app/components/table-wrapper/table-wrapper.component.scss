@@ -18,6 +18,17 @@
     display: none;
 }
 
+:host ::ng-deep .mat-sort-header-container {
+    width: 100%;
+}
+
+:host ::ng-deep .mat-sort-header-content {
+    display: flex;
+    width: 100%;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
 
 :host ::ng-deep mat-mdc-form-field > div > div.mat-mdc-form-field-flex > div,
 :host ::ng-deep .mat-mdc-form-field-infix {
@@ -40,6 +51,13 @@
     padding: 0 10px 0 10px!important;
 }
 
+.cell-align-right {
+    text-align: right !important;
+}
+.cell-align-center {
+    text-align: center !important;
+}
+
 /* Date range picker changes in header */
 :host ::ng-deep mat-mdc-datepicker-toggle > button {
     height: 15px;
@@ -59,6 +77,25 @@
     display: flex;
     flex-direction: row;
     padding: 2px;
+
+    flex: 1 1 auto; 
+    min-width: 0; 
+}
+.header-cell form {
+    display: flex;
+    flex-direction: column;
+    justify-self: stretch;
+    flex-grow: 1;
+}
+
+.header-cell mat-form-field { 
+    flex: 1 1 auto; 
+    min-width: 0; 
+    width: 100%; 
+}
+
+.row-cell {
+    margin-right: 18px;
 }
 
 .full-width {
@@ -87,4 +124,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.table-load-error {
+    margin: 8px 0;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--mdc-theme-error, #b31717);
+    color: var(--mdc-theme-error, #b31717);
+    font-size: 0.875rem;
+    line-height: 1.25rem;
 }

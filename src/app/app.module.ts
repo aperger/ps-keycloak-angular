@@ -1,5 +1,8 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeHu from '@angular/common/locales/hu';
+registerLocaleData(localeHu);
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,9 +31,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
-import { UsersComponent } from './users/users.component';
-import { CompaniesComponent } from './companies/companies.component';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { UsersComponent } from './components/users/users.component';
+import { CompaniesComponent } from './components/companies/companies.component';
+import { SitesComponent } from './components/sites/sites.component';
+import { MeasuringPointsComponent } from './components/measuring-points/measuring-points.component';
+import { MeasuredParametersComponent } from './components/measured-parameters/measured-parameters.component';
+import { PhysicalAttributesComponent } from './components/physical-attributes/physical-attributes.component';
+import { MeasuredDataComponent } from './components/measured-data/measured-data.component';
 
 
 @NgModule({
@@ -43,7 +51,12 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     TableWrapperComponent,
 
     UsersComponent,
-    CompaniesComponent
+    CompaniesComponent,
+    SitesComponent,
+    MeasuringPointsComponent,
+    PhysicalAttributesComponent,
+    MeasuredParametersComponent,
+    MeasuredDataComponent
   ],
   imports: [
     BrowserModule,
@@ -73,6 +86,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     MatMomentDateModule
   ],
   providers: [
+    { provide: LOCALE_ID, useValue: 'hu' },
     KeycloakService,
     {
       provide: APP_INITIALIZER,

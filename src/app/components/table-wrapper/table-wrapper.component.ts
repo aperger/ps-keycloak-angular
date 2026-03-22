@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient, HttpUrlEncodingCodec } from '@angular/common/http';
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDateRangeInput, MatDateRangePicker, MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -19,6 +19,7 @@ export interface ColumnDefinition {
     title: string;
     filterable: boolean;
     sortDisabled?: boolean;
+    align?: 'left' | 'center' | 'right';
     filterOptions?: KeyValuePair[];
     cell: (element: any) => string;
 }
@@ -29,7 +30,7 @@ export interface ColumnDefinition {
     templateUrl: './table-wrapper.component.html',
     styleUrls: ['./table-wrapper.component.scss']
 })
-export class TableWrapperComponent implements OnInit, AfterViewInit {
+export class TableWrapperComponent implements OnInit, AfterViewInit, OnChanges {
 
     @Input() dataSource: any[];
     @Input() restApiurl: string;
@@ -42,6 +43,7 @@ export class TableWrapperComponent implements OnInit, AfterViewInit {
     @Input() filterInputTimeout = 1000;
     @Input() preFilters: KeyValuePair[];
     @Input() hidePagination: boolean = false;
+    @Input() spinnerImageUrl?: string;
     // set preFilters(pairs : KeyValuePair[]) {
     //   const controlDisabledInit = new Map<string, any>();
     //   pairs?.forEach(p => {
@@ -58,6 +60,7 @@ export class TableWrapperComponent implements OnInit, AfterViewInit {
 
     firstCall = true;
     isLoadingResults = false;
+    loadErrorMessage: string | null = null;
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
@@ -116,16 +119,27 @@ export class TableWrapperComponent implements OnInit, AfterViewInit {
                 // Start it with an empty event to get the first page (only once)
                 this.firstCall ? startWith({}) : tap(),
                 switchMap(() => {
-                    // setTimeout(() => this.globalService.showProgressBar());
+                    setTimeout(() => {
+                        this.loadErrorMessage = null;
+                        this.isLoadingResults = true;
+                    }, 10);
+                    
                     this.queryString = this.getQueryString(this.filterMap.entries());
-                    this.isLoadingResults = true;
+                    
                     return this.restApi.fetchData(
                         this.sort.active,
                         this.sort.direction,
                         this.paginator.pageIndex,
                         this.paginator.pageSize,
                         this.queryString
-                    ).pipe(catchError(() => {
+                    ).pipe(catchError((err: any, caught: Observable<any>) => {
+                        if (err.error && err.error.detail) {
+                            this.loadErrorMessage = err.error.detail;
+                        } else if (err.message) {
+                            this.loadErrorMessage = err.message; // 'Unable to load table data. Please try again.';
+                        } else {
+                            this.loadErrorMessage = 'Unable to load table data. HTTP Status ' + err.status;
+                        }
                         return of(null);
                     }));
                 }),
@@ -190,6 +204,17 @@ export class TableWrapperComponent implements OnInit, AfterViewInit {
         //// -> it is better is we want to magae tthe first load from outside...
         // this.paginator.page.emit({pageIndex: 0, pageSize: 1, length: 1});
 
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes['restApiurl'] && !changes['restApiurl'].firstChange && this.paginator) {
+            this.restApi = new RestApi(
+                this.httpClient, this.restApiurl,
+                this.pageIndexParamName, this.pageSizeParamName, this.sortParamName
+            );
+            this.paginator.pageIndex = 0;
+            this.paginator.page.emit({ pageIndex: 0, pageSize: this.paginator.pageSize, length: this.paginator.length });
+        }
     }
 
     onLoadPage(pageEvent: PageEvent) {

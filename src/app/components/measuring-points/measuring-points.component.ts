@@ -26,19 +26,17 @@ export class MeasuringPointsComponent {
             cell: (element: any) => element.name
         },
         {
-            fieldName: 'company',
+            fieldName: 'company.name',
             fieldType: 'text',
             title: 'Cég',
-            filterable: false,
-            sortDisabled: true,
+            filterable: true,
             cell: (element: any) => element.company.name
         },
         {
-            fieldName: 'site',
+            fieldName: 'siteName',
             fieldType: 'text',
             title: 'Telephely',
-            filterable: false,
-            sortDisabled: true,
+            filterable: true,
             cell: (element: any) => element.site.name
         }
     ];

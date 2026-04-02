@@ -133,10 +133,14 @@ export class TableWrapperComponent implements OnInit, AfterViewInit, OnChanges {
                         this.paginator.pageSize,
                         this.queryString
                     ).pipe(catchError((err: any, caught: Observable<any>) => {
-                        if (err.error && err.error.detail) {
+                        if (err?.error?.error) {
+                            this.loadErrorMessage = err.error.error;
+                        } else if (typeof err?.error === 'string' && err.error.trim().length > 0) {
+                            this.loadErrorMessage = err.error;
+                        } else if (err?.error?.detail) {
                             this.loadErrorMessage = err.error.detail;
-                        } else if (err.message) {
-                            this.loadErrorMessage = err.message; // 'Unable to load table data. Please try again.';
+                        } else if (err?.message) {
+                            this.loadErrorMessage = err.message;
                         } else {
                             this.loadErrorMessage = 'Unable to load table data. HTTP Status ' + err.status;
                         }
